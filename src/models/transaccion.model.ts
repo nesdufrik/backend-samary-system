@@ -1,19 +1,16 @@
 import { model, Schema, Types } from "mongoose";
 import { Atencion, Estado } from "../interfaces/enums";
-import { Categoria, SubCategoria, Item, Orden, ProductosOrden } from "../interfaces/transaccion.interface";
+import { Categoria, Item, Orden, ProductosOrden } from "../interfaces/transaccion.interface";
 
 const CategoriaSchema = new Schema<Categoria>(
     {
         name: { type: String, required: true },
-        sucursal: { type: Types.ObjectId, ref: 'sucursales', required: true }
-    }
-)
-
-const SubCategoriaSchema = new Schema<SubCategoria>(
-    {
-        name: { type: String, required: true },
         sucursal: { type: Types.ObjectId, ref: 'sucursales', required: true },
-        categoria: { type: Types.ObjectId, ref: 'categorias', required: true }
+        etiquetas: [{ type: String }]
+    },
+    {
+        timestamps: true,
+        versionKey: false
     }
 )
 
@@ -22,7 +19,7 @@ const ItemSchema = new Schema<Item>(
         name: { type: String, required: true },
         sucursal: { type: Types.ObjectId, ref: 'sucursales', required: true },
         descripcion: { type: String, required: true },
-        subCategoria: { type: Types.ObjectId, ref: 'subcategorias', required: true },
+        subcategoria: { type: String, required: true },
         precio: { type: Number, required: true },
     },
     {
@@ -73,9 +70,8 @@ const PedidoSchema = new Schema<ProductosOrden>(
 
 
 const CategoriaModel = model('categorias', CategoriaSchema)
-const SubCategoriaModel = model('subcategorias', SubCategoriaSchema)
 const ItemModel = model('items', ItemSchema)
 const OrdenModel = model('ordenes', OrdenSchema)
 const PedidoModel = model('pedidos', PedidoSchema)
 
-export { CategoriaModel, SubCategoriaModel, ItemModel, OrdenModel, PedidoModel }
+export { CategoriaModel, ItemModel, OrdenModel, PedidoModel }

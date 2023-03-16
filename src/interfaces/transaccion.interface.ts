@@ -4,19 +4,14 @@ import { Atencion, Estado } from "./enums"
 export interface Categoria {
     name: string
     sucursal: ObjectId
-}
-
-export interface SubCategoria {
-    name: string
-    sucursal: ObjectId
-    categoria: ObjectId
+    etiquetas: [string]
 }
 
 export interface Item {
     name: string
     sucursal: ObjectId
     descripcion: string
-    subCategoria: ObjectId
+    subcategoria: string
     precio: number
 }
 
