@@ -6,9 +6,9 @@ import { Router } from "express";
 const router = Router()
 
 router.get('/sucursal/:sucursalId/', errorHandle(verificacionDeToken), listAllCategoriasController)
-router.get('/sucursal/:sucursalId/:categoriaId', errorHandle(verificacionDeToken), detailCategoriaController)
+router.get('/:categoriaId', errorHandle(verificacionDeToken), detailCategoriaController)
 router.post('/sucursal/:sucursalId/', errorHandle(verificacionDeToken), createCategoriaController)
-router.put('/sucursal/:sucursalId/:categoriaId', errorHandle(verificacionDeToken), updateCategoriaController)
-router.delete('/sucursal/:sucursalId/:categoriaId', errorHandle(verificacionDeToken), deleteCategoriaController)
+router.put('/:categoriaId', errorHandle(verificacionDeToken), updateCategoriaController)
+router.delete('/:categoriaId', errorHandle(verificacionDeToken), deleteCategoriaController)
 
 export { router }
