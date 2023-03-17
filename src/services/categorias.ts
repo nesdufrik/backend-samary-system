@@ -21,6 +21,12 @@ export const createCategoria = async (data: Categoria, id: string) => {
     return createCategoria
 }
 
-export const updateCategoria = async (data: Categoria) => {
+export const updateCategoria = async (data: Categoria, id: string) => {
+    const actualizar = await CategoriaModel.findOneAndUpdate({ _id: id }, data, { new: true })
+    return actualizar
+}
 
+export const deleteCategoria = async (id: string) => {
+    const eliminar = await CategoriaModel.deleteOne({ _id: id })
+    return eliminar
 }
