@@ -9,7 +9,7 @@ export const getAllEmpresas = async (session: JwtPayload) => {
 }
 
 export const getAllSucursales = async (id: string) => {
-    const listAll = await SucursalModel.find({ empresa: id }, { "_id": 1, "name": 1 })
+    const listAll = await SucursalModel.find({ empresa: id }, { "createdAt": 0, "updatedAt": 0, "empresa": 0 })
     return listAll
 }
 
@@ -20,7 +20,7 @@ export const detailEmpresa = async (id: string) => {
 
 export const detailSucursal = async (id: string) => {
     return new Promise((resolve, reject) => {
-        SucursalModel.find({ _id: id }, { "createdAt": 0, "updatedAt": 0 })
+        SucursalModel.findOne({ _id: id }, { "createdAt": 0, "updatedAt": 0 })
             .populate('empresa', '-createdAt -updatedAt -_id -propietario')
             .exec((err, data) => {
                 if (err) throw new ApiError(500, "Ocurrio un error interno")
