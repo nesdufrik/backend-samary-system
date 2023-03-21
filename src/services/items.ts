@@ -1,4 +1,3 @@
-import { create } from "domain"
 import { Item } from "../interfaces/transaccion.interface"
 import { ItemModel } from "../models/transaccion.model"
 
