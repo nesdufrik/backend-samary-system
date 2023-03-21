@@ -7,7 +7,7 @@ export const getAllCategorias = async (id: string) => {
 }
 
 export const detailCategoria = async (id: string) => {
-    const detail = await CategoriaModel.find({ _id: id }, { "createdAt": 0, "updatedAt": 0 })
+    const detail = await CategoriaModel.findOne({ _id: id }, { "createdAt": 0, "updatedAt": 0 })
     return detail
 }
 

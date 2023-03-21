@@ -12,7 +12,7 @@ export interface Item {
     sucursal: ObjectId
     descripcion: string
     categoria: string
-    subcategoria: string
+    etiqueta: string
     precio: number
 }
 
