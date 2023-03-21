@@ -18,7 +18,8 @@ const ItemSchema = new Schema<Item>(
     {
         name: { type: String, required: true },
         sucursal: { type: Types.ObjectId, ref: 'sucursales', required: true },
-        descripcion: { type: String, required: true },
+        descripcion: { type: String },
+        categoria: { type: String, required: true },
         subcategoria: { type: String, required: true },
         precio: { type: Number, required: true },
     },

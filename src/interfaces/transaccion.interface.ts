@@ -11,6 +11,7 @@ export interface Item {
     name: string
     sucursal: ObjectId
     descripcion: string
+    categoria: string
     subcategoria: string
     precio: number
 }
