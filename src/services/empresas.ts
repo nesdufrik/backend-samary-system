@@ -1,3 +1,4 @@
+import { ApiError } from './../class/ApiError';
 import { JwtPayload } from "jsonwebtoken";
 import { Empresa, Sucursal } from "../interfaces/empresa.interface";
 import { EmpresaModel, SucursalModel } from "../models/empresa.model";
@@ -32,11 +33,15 @@ export const createEmpresa = async (data: Empresa, session: JwtPayload) => {
 }
 
 export const createSucursal = async (data: Sucursal, id: string) => {
+    const checkIs = await SucursalModel.findOne({ arroba: data.arroba })
+    if (checkIs) throw new ApiError(401, "El arroba que intenta utilizar ya esta siendo utilizado por otra sucursal")
+
     const crear = await SucursalModel.create({
         name: data.name,
         empresa: id,
         direccion: data.direccion,
-        telefono: data.telefono
+        telefono: data.telefono,
+        arroba: data.arroba
     })
 
     return crear
@@ -49,11 +54,14 @@ export const updateEmpresa = async (data: Empresa, id: string) => {
 }
 
 export const updateSucursal = async (data: Sucursal, id: string) => {
-    const actualizar = await SucursalModel.findOneAndUpdate({ _id: id }, {
+
+    const dataUpdate = {
         name: data.name,
         direccion: data.direccion,
         telefono: data.telefono
-    }, { new: true })
+    }
+
+    const actualizar = await SucursalModel.findOneAndUpdate({ _id: id }, dataUpdate, { new: true })
 
     return actualizar
 }

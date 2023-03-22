@@ -10,4 +10,5 @@ export interface Sucursal {
     empresa: ObjectId
     direccion: string
     telefono: string
+    arroba: string
 }

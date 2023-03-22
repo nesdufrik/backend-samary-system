@@ -17,7 +17,8 @@ const SucursalSchema = new Schema<Sucursal>(
         name: { type: String, required: true },
         empresa: { type: Types.ObjectId, ref: 'empresas', required: true },
         direccion: String,
-        telefono: String
+        telefono: String,
+        arroba: String
     },
     {
         timestamps: true,

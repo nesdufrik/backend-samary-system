@@ -21,7 +21,7 @@ const EmpleadoSchema = new Schema<Empleado>(
         fullName: { type: String, required: true },
         rol: { type: String, required: true, enum: Object.values(Roles) },
         cargo: { type: String, required: true },
-        sucursales: [{ type: Types.ObjectId, ref: 'sucursales', required: true }]
+        sucursal: { type: Types.ObjectId, ref: 'sucursales', required: true }
     },
     {
         timestamps: true,

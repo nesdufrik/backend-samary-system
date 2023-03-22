@@ -11,7 +11,7 @@ export interface Usuario {
 export interface Empleado extends Usuario {
     rol: Roles
     cargo: string
-    sucursales: [ObjectId]
+    sucursal: ObjectId
 }
 
 export interface Cliente {

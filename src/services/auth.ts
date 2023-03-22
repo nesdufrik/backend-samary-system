@@ -56,7 +56,6 @@ export const loginAuth = async (data: LoginAuthType) => {
     const dataSession = {
         name: checkIs.fullName,
         token: tokenSession,
-        path: path
     }
 
     return dataSession
