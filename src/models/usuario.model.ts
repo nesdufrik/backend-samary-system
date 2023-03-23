@@ -20,6 +20,7 @@ const EmpleadoSchema = new Schema<Empleado>(
         email: { type: String, required: true },
         password: { type: String, required: true },
         fullName: { type: String, required: true },
+        avatar: { type: String, required: true },
         rol: { type: String, required: true, enum: Object.values(Roles) },
         cargo: { type: String, required: true },
         sucursal: { type: Types.ObjectId, ref: 'sucursales', required: true }
