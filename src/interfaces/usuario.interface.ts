@@ -6,6 +6,7 @@ export interface Usuario {
     email: string
     password: string
     fullName: string
+    avatar: string
 }
 
 export interface Empleado extends Usuario {
@@ -22,5 +23,5 @@ export interface Cliente {
 }
 
 export type LoginAuthType = Pick<Empleado, 'email' | 'password'>
-export type UsuarioUpdate = Pick<Usuario, 'fullName' | 'password'>
+export type UsuarioUpdate = Pick<Usuario, 'fullName' | 'password' | 'avatar'>
 export type EmpleadoReg = Pick<Empleado, 'email' | 'password' | 'fullName' | 'rol'>
