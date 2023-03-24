@@ -1,6 +1,5 @@
 import { listAllEmpleadosController, createEmpleadoController, deleteEmpleadoController, detailEmpleadoController, updateEmpleadoController } from './../controllers/empleados';
 import { verificacionDeToken } from './../middleware/session.middleware';
-import { errorHandle } from './../utils/error.handle';
 import { Router } from "express";
 
 const router = Router()

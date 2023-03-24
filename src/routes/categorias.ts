@@ -1,6 +1,5 @@
 import { createCategoriaController, deleteCategoriaController, detailCategoriaController, listAllCategoriasController, updateCategoriaController } from './../controllers/categorias';
 import { verificacionDeToken } from './../middleware/session.middleware';
-import { errorHandle } from './../utils/error.handle';
 import { Router } from "express";
 
 const router = Router()

@@ -1,7 +1,6 @@
 import { Router } from "express";
 import { createEmpresaController, createSucursalController, deleteEmpresaController, deleteSucursalController, detailEmpresaController, detailSucursalController, listAllEmpresasController, listAllSucursalesController, updateEmpresaController, updateSucursalController } from "../controllers/empresas";
 import { verificacionDeToken } from "../middleware/session.middleware";
-import { errorHandle } from "../utils/error.handle";
 
 const router = Router()
 

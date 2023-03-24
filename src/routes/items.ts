@@ -1,7 +1,6 @@
 import { listAllItemsController, detailItemController, createItemController, updateItemController, deleteItemController } from './../controllers/items';
 import { Router } from "express";
 import { verificacionDeToken } from "../middleware/session.middleware";
-import { errorHandle } from "../utils/error.handle";
 
 const router = Router()
 

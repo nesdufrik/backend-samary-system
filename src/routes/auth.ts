@@ -3,7 +3,6 @@ import { validateLogin, validateUpdateUsuario } from './../validators/usuarios';
 import { deleteUserController, loginAuthController, registerUserController, updateUserController, verifyJWTController } from './../controllers/auth';
 import { Router } from "express";
 import { validateRegisterUsuario } from '../validators/usuarios';
-import { errorHandle } from '../utils/error.handle';
 
 const router = Router()
 
