@@ -6,7 +6,8 @@ import { encriptar, verificar } from "../utils/bcrypt.handle";
 import { JwtPayload } from 'jsonwebtoken';
 
 export const loginAuth = async (data: LoginAuthType) => {
-    let path = ""
+    let permissions = ""
+    let logInAdmin
     let checkIs = await UsuarioModel.findOne({ email: data.email })
 
     if (!checkIs) {
@@ -14,9 +15,11 @@ export const loginAuth = async (data: LoginAuthType) => {
         if (!checkIs) {
             throw new ApiError(401, `Por favor revisa tu usuario y contraseña. Los campos son sensibles a mayúsculas y minúsculas`)
         }
-        path = "pos"
+        permissions = "employee"
+        logInAdmin = false
     } else {
-        path = "admin"
+        permissions = "administrator"
+        logInAdmin = true
     }
 
     const isCorrect = await verificar(data.password, checkIs.password)
@@ -24,11 +27,12 @@ export const loginAuth = async (data: LoginAuthType) => {
 
     const payload = {
         id: checkIs._id,
-        name: checkIs.fullName
+        name: checkIs.fullName,
+        permissions,
     }
-
     const tokenSession = generarToken(payload)
     const dataSession = {
+        logInAdmin,
         name: checkIs.fullName,
         token: tokenSession,
         avatar: checkIs.avatar
