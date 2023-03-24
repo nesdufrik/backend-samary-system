@@ -50,7 +50,7 @@ export const updateEmpleado = async (data: EmpleadoUpdate, id: string) => {
         cargo: data.cargo
     }
 
-    const actualizar = EmpleadoModel.findOneAndUpdate({ _id: id }, updateData, { new: true })
+    const actualizar = EmpleadoModel.findOneAndUpdate({ _id: id }, updateData, { new: true, projection: { createdAt: 0, updatedAt: 0, password: 0, rol: 0 } })
     return actualizar
 }
 
