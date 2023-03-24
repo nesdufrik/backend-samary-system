@@ -1,5 +1,5 @@
 import { NextFunction, Request, Response } from "express"
-import { deleteUser, loginAuth, registerUser, updateUser } from "../services/auth"
+import { deleteUser, loginAuth, oauthLogin, registerUser, updateUser } from "../services/auth"
 
 export const loginAuthController = async (req: Request, res: Response, next: NextFunction) => {
     try {
@@ -57,4 +57,16 @@ export const verifyJWTController = (req: Request, res: Response, next: NextFunct
             "token": true
         }
     })
+}
+
+export const oauthLoginController = async (req: Request, res: Response, next: NextFunction) => {
+    try {
+        const response = await oauthLogin(req.body.session.id)
+        res.send({
+            "success": true,
+            "data": response
+        })
+    } catch (error) {
+        next(error)
+    }
 }

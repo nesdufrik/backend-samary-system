@@ -79,3 +79,11 @@ export const deleteUser = async (session: JwtPayload) => {
     const eliminar = UsuarioModel.deleteOne({ _id: session.id })
     return eliminar
 }
+
+export const oauthLogin = async (id: string) => {
+    const checkIs = await EmpleadoModel.findOne({ _id: id }, { "fullName": 1, "avatar": 1 })
+    if (!checkIs) throw new ApiError(401, `¡Advertencia! El token que intentas usar pertenece a un usuario que ya no está activo en nuestro sistema. Por favor, inicia sesión con tu propia cuenta para continuar usando nuestros servicios. Si tienes problemas para acceder a tu cuenta, por favor contáctanos para recibir ayuda. El uso de tokens de usuarios inactivos está prohibido. Gracias por tu comprensión y cooperación.`)
+
+    return checkIs
+
+}
