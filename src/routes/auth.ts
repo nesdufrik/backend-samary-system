@@ -7,10 +7,10 @@ import { errorHandle } from '../utils/error.handle';
 
 const router = Router()
 
-router.get('/jwt', errorHandle(verificacionDeToken), verifyJWTController)
+router.get('/jwt', verificacionDeToken, verifyJWTController)
 router.post('/login', validateLogin, loginAuthController)
 router.post('/register', validateRegisterUsuario, registerUserController)
-router.put('/update', errorHandle(verificacionDeToken), validateUpdateUsuario, updateUserController)
-router.delete('/delete', errorHandle(verificacionDeToken), deleteUserController)
+router.put('/update', verificacionDeToken, validateUpdateUsuario, updateUserController)
+router.delete('/delete', verificacionDeToken, deleteUserController)
 
 export { router }

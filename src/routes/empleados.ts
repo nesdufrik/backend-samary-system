@@ -5,10 +5,10 @@ import { Router } from "express";
 
 const router = Router()
 
-router.get('/sucursal/:sucursalId', errorHandle(verificacionDeToken), listAllEmpleadosController)
-router.get('/:empleadoId', errorHandle(verificacionDeToken), detailEmpleadoController)
-router.post('/sucursal/:sucursalId', errorHandle(verificacionDeToken), createEmpleadoController)
-router.put('/:empleadoId', errorHandle(verificacionDeToken), updateEmpleadoController)
-router.delete('/:empleadoId', errorHandle(verificacionDeToken), deleteEmpleadoController)
+router.get('/sucursal/:sucursalId', verificacionDeToken, listAllEmpleadosController)
+router.get('/:empleadoId', verificacionDeToken, detailEmpleadoController)
+router.post('/sucursal/:sucursalId', verificacionDeToken, createEmpleadoController)
+router.put('/:empleadoId', verificacionDeToken, updateEmpleadoController)
+router.delete('/:empleadoId', verificacionDeToken, deleteEmpleadoController)
 
 export { router }

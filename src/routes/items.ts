@@ -5,10 +5,10 @@ import { errorHandle } from "../utils/error.handle";
 
 const router = Router()
 
-router.get('/sucursal/:sucursalId', errorHandle(verificacionDeToken), listAllItemsController)
-router.get('/:itemId', errorHandle(verificacionDeToken), detailItemController)
-router.post('/sucursal/:sucursalId', errorHandle(verificacionDeToken), createItemController)
-router.put('/:itemId', errorHandle(verificacionDeToken), updateItemController)
-router.delete('/:itemId', errorHandle(verificacionDeToken), deleteItemController)
+router.get('/sucursal/:sucursalId', verificacionDeToken, listAllItemsController)
+router.get('/:itemId', verificacionDeToken, detailItemController)
+router.post('/sucursal/:sucursalId', verificacionDeToken, createItemController)
+router.put('/:itemId', verificacionDeToken, updateItemController)
+router.delete('/:itemId', verificacionDeToken, deleteItemController)
 
 export { router }

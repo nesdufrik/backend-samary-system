@@ -6,23 +6,23 @@ import { errorHandle } from "../utils/error.handle";
 const router = Router()
 
 //all
-router.get('/', errorHandle(verificacionDeToken), listAllEmpresasController)
-router.get('/:empresa/sucursal', errorHandle(verificacionDeToken), listAllSucursalesController)
+router.get('/', verificacionDeToken, listAllEmpresasController)
+router.get('/:empresa/sucursal', verificacionDeToken, listAllSucursalesController)
 
 //detail
-router.get('/:id', errorHandle(verificacionDeToken), detailEmpresaController)
-router.get('/sucursal/:id', errorHandle(verificacionDeToken), detailSucursalController)
+router.get('/:id', verificacionDeToken, detailEmpresaController)
+router.get('/sucursal/:id', verificacionDeToken, detailSucursalController)
 
 //create
-router.post('/', errorHandle(verificacionDeToken), createEmpresaController)
-router.post('/:empresa/sucursal', errorHandle(verificacionDeToken), createSucursalController)
+router.post('/', verificacionDeToken, createEmpresaController)
+router.post('/:empresa/sucursal', verificacionDeToken, createSucursalController)
 
 //update
-router.put('/:id', errorHandle(verificacionDeToken), updateEmpresaController)
-router.put('/sucursal/:id', errorHandle(verificacionDeToken), updateSucursalController)
+router.put('/:id', verificacionDeToken, updateEmpresaController)
+router.put('/sucursal/:id', verificacionDeToken, updateSucursalController)
 
 //delete
-router.delete('/:id', errorHandle(verificacionDeToken), deleteEmpresaController)
-router.delete('/sucursal/:id', errorHandle(verificacionDeToken), deleteSucursalController)
+router.delete('/:id', verificacionDeToken, deleteEmpresaController)
+router.delete('/sucursal/:id', verificacionDeToken, deleteSucursalController)
 
 export { router }
