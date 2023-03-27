@@ -1,4 +1,4 @@
-import { createCategoria, deleteCategoria, detailCategoria, getAllCategorias, updateCategoria } from './../services/categorias';
+import { createCategoria, deleteCategoria, detailCategoria, getAllCategorias, updateCategoria, posGetAllCategorias } from './../services/categorias';
 import { NextFunction, Request, Response } from "express";
 
 export const listAllCategoriasController = async (req: Request, res: Response, next: NextFunction) => {
@@ -52,6 +52,20 @@ export const updateCategoriaController = async (req: Request, res: Response, nex
 export const deleteCategoriaController = async (req: Request, res: Response, next: NextFunction) => {
     try {
         const response = await deleteCategoria(req.params.categoriaId)
+        res.send({
+            "success": true,
+            "data": response
+        })
+    } catch (error) {
+        next(error)
+    }
+}
+
+// Controller para POS Employee
+
+export const posListAllCategoriasController = async (req: Request, res: Response, next: NextFunction) => {
+    try {
+        const response = await posGetAllCategorias(req.body.session.id)
         res.send({
             "success": true,
             "data": response

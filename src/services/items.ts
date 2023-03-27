@@ -1,5 +1,6 @@
 import { Item } from "../interfaces/transaccion.interface"
 import { ItemModel } from "../models/transaccion.model"
+import { EmpleadoModel } from "../models/usuario.model"
 
 export const getAllItems = async (id: string) => {
     const listItems = await ItemModel.find({ sucursal: id }, { "createdAt": 0, "updatedAt": 0, "descripcion": 0, "sucursal": 0 })
@@ -31,4 +32,12 @@ export const updateItem = async (data: Item, id: string) => {
 export const deleteItem = async (id: string) => {
     const eliminar = await ItemModel.deleteOne({ _id: id })
     return eliminar
+}
+
+// Servicios para POS Employee
+
+export const posGetAllItems = async (id: string) => {
+    const sucursalId = await EmpleadoModel.findOne({ _id: id })
+    const listItems = await ItemModel.find({ sucursal: sucursalId?.sucursal }, { "createdAt": 0, "updatedAt": 0, "descripcion": 0, "sucursal": 0 })
+    return listItems
 }
