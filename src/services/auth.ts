@@ -1,3 +1,4 @@
+import { check } from 'express-validator';
 import { generarToken } from './../utils/jwt.handle';
 import { ApiError } from "../class/ApiError";
 import { LoginAuthType, Usuario, UsuarioUpdate } from "../interfaces/usuario.interface";
@@ -86,4 +87,15 @@ export const oauthLogin = async (id: string) => {
 
     return checkIs
 
+}
+
+export const checkUserJWT = async (id: string, permissions: string) => {
+    if (permissions == 'administrator') {
+        const checkIs = await UsuarioModel.findOne({ _id: id }, { "fullName": 1, "avatar": 1 })
+        return checkIs
+    }
+    if (permissions == 'employee') {
+        const checkIs = await EmpleadoModel.findOne({ _id: id }, { "fullName": 1, "avatar": 1 })
+        return checkIs
+    }
 }
