@@ -20,6 +20,8 @@ export interface Cliente {
     nit: number
     telf: string
     email: string
+    tipo: string
+    nota: string
 }
 
 export type LoginAuthType = Pick<Empleado, 'email' | 'password'>

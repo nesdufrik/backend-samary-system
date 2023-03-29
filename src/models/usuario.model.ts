@@ -36,7 +36,9 @@ const ClienteSchema = new Schema<Cliente>(
         name: String,
         nit: Number,
         telf: String,
-        email: String
+        email: String,
+        tipo: String,
+        nota: String
     },
     {
         timestamps: true,
