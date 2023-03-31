@@ -1,4 +1,5 @@
 import { model, Schema, Types } from "mongoose";
+import { arrayBuffer } from "stream/consumers";
 import { Atencion, Estado } from "../interfaces/enums";
 import { Categoria, Item, Orden, ProductosOrden } from "../interfaces/transaccion.interface";
 
@@ -31,7 +32,8 @@ const ItemSchema = new Schema<Item>(
 
 const OrdenSchema = new Schema<Orden>(
     {
-        cliente: { type: Types.ObjectId, ref: 'clientes', required: true },
+        sucursal: { type: Types.ObjectId, ref: 'sucursales', required: true },
+        cliente: { type: Array },
         empleado: { type: Types.ObjectId, ref: 'empleados', required: true },
         estado: {
             type: String,
@@ -42,10 +44,12 @@ const OrdenSchema = new Schema<Orden>(
         tipo: {
             type: String,
             required: true,
+            default: Atencion.Local,
             enum: Object.values(Atencion)
         },
-        pedido: [{ type: Types.ObjectId, ref: 'pedidos', required: true }],
-        total: Number,
+        mesa: { type: String },
+        pedido: [{ type: Object, required: true }],
+        total: { type: Number, required: true },
         factura: { type: Boolean, required: true, default: true }
     },
     {

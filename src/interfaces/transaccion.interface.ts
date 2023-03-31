@@ -1,3 +1,4 @@
+import { Cliente } from './usuario.interface';
 import { ObjectId } from "mongoose"
 import { Atencion, Estado } from "./enums"
 
@@ -24,11 +25,13 @@ export interface ProductosOrden extends Item {
 }
 
 export interface Orden {
-    cliente: ObjectId,
-    empleado: ObjectId,
-    estado: Estado,
-    tipo: Atencion,
-    pedido: [ProductosOrden]
+    sucursal: ObjectId
+    cliente: Cliente
+    empleado: ObjectId
+    estado: Estado
+    tipo: Atencion
+    mesa: string
+    pedido: [PedidosOrden]
     total: number
     factura: boolean
 }
@@ -38,6 +41,4 @@ export interface Menu {
     items: [Item]
 }
 
-export type pedidosOrden = Pick<Orden, 'pedido'>
-export type regOrden = Pick<ProductosOrden, 'name' | 'cantidad' | 'nota'>
-export type costOrden = Pick<ProductosOrden, 'name' | 'cantidad' | 'importe'>
+export type PedidosOrden = Pick<ProductosOrden, 'name' | 'precio' | 'cantidad' | 'pendiente' | 'nota' | 'importe'>
