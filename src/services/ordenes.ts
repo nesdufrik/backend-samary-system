@@ -10,9 +10,16 @@ export const listarOrdenes = async (sucursalId: string) => {
     return listOrders
 }
 
-export const ordenesPorTotal = async (sucursalId: string) => {
+export const ordenesPorTotal = async (sucursalId: string, desde: string, hasta: string) => {
+
+    const localDateDesde = new Date(desde)
+    const localDateHasta = new Date(hasta)
+
+    const isoDateDesde = localDateDesde.toISOString()
+    const isoDateHasta = localDateHasta.toISOString()
+
     const orderByTotal = await OrdenModel.find(
-        { sucursal: sucursalId },
+        { sucursal: sucursalId, createdAt: { $gte: isoDateDesde, $lte: isoDateHasta } },
         { createdAt: 1, total: 1 }
     )
     return orderByTotal

@@ -33,7 +33,7 @@ const ItemSchema = new Schema<Item>(
 const OrdenSchema = new Schema<Orden>(
     {
         sucursal: { type: Types.ObjectId, ref: 'sucursales', required: true },
-        cliente: { type: Array },
+        cliente: { type: Object },
         empleado: { type: Types.ObjectId, ref: 'empleados', required: true },
         estado: {
             type: String,
