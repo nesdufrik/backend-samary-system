@@ -1,6 +1,12 @@
-import { Cliente } from './usuario.interface';
-import { ObjectId } from "mongoose"
-import { Atencion, Estado } from "./enums"
+import { Cliente } from './usuario.interface'
+import { ObjectId } from 'mongoose'
+import { Atencion, Estado } from './enums'
+
+export interface Caja {
+    code: string
+    sucursal: ObjectId
+    active: boolean
+}
 
 export interface Categoria {
     name: string
@@ -41,4 +47,7 @@ export interface Menu {
     items: [Item]
 }
 
-export type PedidosOrden = Pick<ProductosOrden, 'name' | 'precio' | 'cantidad' | 'pendiente' | 'nota' | 'importe'>
+export type PedidosOrden = Pick<
+    ProductosOrden,
+    'name' | 'precio' | 'cantidad' | 'pendiente' | 'nota' | 'importe'
+>
