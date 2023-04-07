@@ -79,20 +79,20 @@ export const agregarOrden = async (data: Orden, session: JwtPayload) => {
 }
 
 export const actualizarOrden = async (ordenId: string, data: Orden) => {
-    const { cliente, mesa, pedido, total } = data
-    const updateOrder = await OrdenModel.findOneAndUpdate(
-        { _id: ordenId },
-        data,
-        { new: true }
-    )
-    return updateOrder
+    await OrdenModel.findOneAndUpdate({ _id: ordenId }, data, { new: true })
+    const updatedOrder = new Promise((resolve, reject) => {
+        OrdenModel.findOne({ _id: ordenId })
+            .populate('empleado', 'fullName avatar -_id')
+            .exec((err, data) => {
+                if (err) throw new ApiError(500, 'Ocurrio un error interno')
+                resolve(data)
+            })
+    })
+    return updatedOrder
 }
 
 export const getOrdenesSucursal = async (session: JwtPayload) => {
     const employeeCheck = await EmpleadoModel.findOne({ _id: session.id })
-    // const listOrders = await OrdenModel.find({
-    //     sucursal: employeeCheck?.sucursal,
-    // })
     const listOrders = new Promise((resolve, reject) => {
         OrdenModel.find({ sucursal: employeeCheck?.sucursal })
             .populate('empleado', 'fullName avatar -_id')
