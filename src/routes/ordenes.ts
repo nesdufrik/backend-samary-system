@@ -6,6 +6,7 @@ import {
     putOrdenController,
     getOrdenesSucursalController,
     deleteOrdenController,
+    pagarOrdenController,
 } from './../controllers/ordenes'
 import { verificacionDeToken } from './../middleware/session.middleware'
 import { Router } from 'express'
@@ -30,5 +31,6 @@ router.get('/id/:ordenId', verificacionDeToken)
 router.post('/id', verificacionDeToken, postOrdenController)
 router.put('/id/:ordenId', verificacionDeToken, putOrdenController)
 router.delete('/id/:ordenId', verificacionDeToken, deleteOrdenController)
+router.put('/pagar/:ordenId', verificacionDeToken, pagarOrdenController)
 
 export { router }

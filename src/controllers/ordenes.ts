@@ -6,6 +6,7 @@ import {
     actualizarOrden,
     getOrdenesSucursal,
     deleteOrden,
+    pagarOrden,
 } from './../services/ordenes'
 import { NextFunction, Request, Response } from 'express'
 
@@ -133,6 +134,22 @@ export const deleteOrdenController = async (
 ) => {
     try {
         const response = await deleteOrden(req.params.ordenId)
+        res.send({
+            success: true,
+            data: response,
+        })
+    } catch (error) {
+        next(error)
+    }
+}
+
+export const pagarOrdenController = async (
+    req: Request,
+    res: Response,
+    next: NextFunction
+) => {
+    try {
+        const response = await pagarOrden(req.params.ordenId, req.body)
         res.send({
             success: true,
             data: response,

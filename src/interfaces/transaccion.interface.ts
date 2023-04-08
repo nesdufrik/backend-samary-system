@@ -40,6 +40,8 @@ export interface Orden {
     pedido: [PedidosOrden]
     total: number
     factura: boolean
+    payMetodo: string
+    moneyClient: number
 }
 
 export interface Menu {

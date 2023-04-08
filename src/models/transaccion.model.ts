@@ -68,6 +68,8 @@ const OrdenSchema = new Schema<Orden>(
         pedido: [{ type: Object, required: true }],
         total: { type: Number, required: true },
         factura: { type: Boolean, required: true, default: true },
+        payMetodo: { type: String },
+        moneyClient: { type: Number },
     },
     {
         timestamps: true,
