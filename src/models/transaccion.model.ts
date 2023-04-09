@@ -48,6 +48,7 @@ const CajaSchema = new Schema<Caja>(
 
 const OrdenSchema = new Schema<Orden>(
     {
+        caja: { type: Types.ObjectId, ref: 'cajas', required: true },
         sucursal: { type: Types.ObjectId, ref: 'sucursales', required: true },
         cliente: { type: Object },
         empleado: { type: Types.ObjectId, ref: 'empleados', required: true },

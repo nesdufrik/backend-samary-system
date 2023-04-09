@@ -1,4 +1,3 @@
-import { check } from 'express-validator'
 import { JwtPayload } from 'jsonwebtoken'
 import { Caja } from '../interfaces/transaccion.interface'
 import { EmpleadoModel } from '../models/usuario.model'

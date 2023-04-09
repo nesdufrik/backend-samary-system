@@ -30,6 +30,7 @@ export interface ProductosOrden extends Item {
 }
 
 export interface Orden {
+    caja: ObjectId
     sucursal: ObjectId
     cliente: Cliente
     empleado: ObjectId

@@ -67,12 +67,16 @@ export const ordenesPorItem = async (
 }
 
 //Employee
-export const agregarOrden = async (data: Orden, session: JwtPayload) => {
+export const agregarOrden = async (
+    data: Orden,
+    session: JwtPayload,
+    caja: string
+) => {
     const { cliente, mesa, pedido, total } = data
-
     const employeeCheck = await EmpleadoModel.findOne({ _id: session.id })
 
     const createOrden = await OrdenModel.create({
+        caja: caja,
         sucursal: employeeCheck?.sucursal,
         cliente,
         empleado: session.id,
@@ -99,10 +103,10 @@ export const actualizarOrden = async (ordenId: string, data: Orden) => {
 }
 
 //Employee
-export const getOrdenesSucursal = async (session: JwtPayload) => {
+export const getOrdenesSucursal = async (session: JwtPayload, caja: string) => {
     const employeeCheck = await EmpleadoModel.findOne({ _id: session.id })
     const listOrders = new Promise((resolve, reject) => {
-        OrdenModel.find({ sucursal: employeeCheck?.sucursal })
+        OrdenModel.find({ sucursal: employeeCheck?.sucursal, caja: caja })
             .populate('empleado', 'fullName avatar -_id')
             .exec((err, data) => {
                 if (err) throw new ApiError(500, 'Ocurrio un error interno')

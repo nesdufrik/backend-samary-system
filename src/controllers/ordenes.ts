@@ -85,7 +85,8 @@ export const postOrdenController = async (
     next: NextFunction
 ) => {
     try {
-        const response = await agregarOrden(req.body, req.body.session)
+        const caja: string = req.query.caja as string
+        const response = await agregarOrden(req.body, req.body.session, caja)
         res.send({
             success: true,
             data: response,
@@ -117,7 +118,8 @@ export const getOrdenesSucursalController = async (
     next: NextFunction
 ) => {
     try {
-        const response = await getOrdenesSucursal(req.body.session)
+        const caja: string = req.query.caja as string
+        const response = await getOrdenesSucursal(req.body.session, caja)
         res.send({
             success: true,
             data: response,

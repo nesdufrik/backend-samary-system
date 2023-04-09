@@ -26,8 +26,8 @@ router.get(
 )
 
 //employee acctions
+// router.get('/id/:ordenId', verificacionDeToken)
 router.get('/id', verificacionDeToken, getOrdenesSucursalController)
-router.get('/id/:ordenId', verificacionDeToken)
 router.post('/id', verificacionDeToken, postOrdenController)
 router.put('/id/:ordenId', verificacionDeToken, putOrdenController)
 router.delete('/id/:ordenId', verificacionDeToken, deleteOrdenController)
