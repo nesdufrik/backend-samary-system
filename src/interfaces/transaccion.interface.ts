@@ -3,7 +3,6 @@ import { ObjectId } from 'mongoose'
 import { Atencion, Estado } from './enums'
 
 export interface Caja {
-    code: string
     sucursal: ObjectId
     active: boolean
 }

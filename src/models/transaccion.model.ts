@@ -37,7 +37,6 @@ const ItemSchema = new Schema<Item>(
 
 const CajaSchema = new Schema<Caja>(
     {
-        code: { type: String, required: true },
         sucursal: { type: Types.ObjectId, ref: 'sucursales', required: true },
         active: { type: Boolean, required: true },
     },
