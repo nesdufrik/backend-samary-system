@@ -123,8 +123,6 @@ export const checkUserJWT = async (id: string, permissions: string) => {
             { _id: id },
             { fullName: 1, avatar: 1 }
         )
-            .populate('sucursal', '-_id -createdAt -updatedAt -empresa')
-            .exec()
         return checkIs
     }
     if (permissions == 'employee') {
