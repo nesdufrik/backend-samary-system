@@ -104,9 +104,31 @@ export const actualizarOrden = async (ordenId: string, data: Orden) => {
 
 //Employee
 export const getOrdenesSucursal = async (session: JwtPayload, caja: string) => {
+    const box = caja || ''
     const employeeCheck = await EmpleadoModel.findOne({ _id: session.id })
     const listOrders = new Promise((resolve, reject) => {
-        OrdenModel.find({ sucursal: employeeCheck?.sucursal, caja: caja })
+        OrdenModel.find({ sucursal: employeeCheck?.sucursal, caja: box })
+            .populate('empleado', 'fullName avatar -_id')
+            .exec((err, data) => {
+                if (err) throw new ApiError(500, 'Ocurrio un error interno')
+                resolve(data)
+            })
+    })
+    return listOrders
+}
+
+export const getOrdenesTerminadas = async (
+    session: JwtPayload,
+    caja: string
+) => {
+    const box = caja || ''
+    const employeeCheck = await EmpleadoModel.findOne({ _id: session.id })
+    const listOrders = new Promise((resolve, reject) => {
+        OrdenModel.find({
+            sucursal: employeeCheck?.sucursal,
+            caja: box,
+            estado: 'terminado',
+        })
             .populate('empleado', 'fullName avatar -_id')
             .exec((err, data) => {
                 if (err) throw new ApiError(500, 'Ocurrio un error interno')

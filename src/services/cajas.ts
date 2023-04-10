@@ -13,6 +13,15 @@ export const getCaja = async (session: JwtPayload) => {
     return cajaActiva
 }
 
+export const getAllCajas = async (session: JwtPayload) => {
+    const check = await EmpleadoModel.findOne({ _id: session.id })
+    const cajasSucursal = await CajaModel.find({
+        sucursal: check?.sucursal,
+    })
+
+    return cajasSucursal
+}
+
 export const crearCaja = async (data: Caja, session: JwtPayload) => {
     const { active } = data
     const employeeCheck = await EmpleadoModel.findOne({ _id: session.id })

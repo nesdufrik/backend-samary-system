@@ -7,6 +7,7 @@ import {
     getOrdenesSucursalController,
     deleteOrdenController,
     pagarOrdenController,
+    getOrdenesTerminadasController,
 } from './../controllers/ordenes'
 import { verificacionDeToken } from './../middleware/session.middleware'
 import { Router } from 'express'
@@ -28,6 +29,7 @@ router.get(
 //employee acctions
 // router.get('/id/:ordenId', verificacionDeToken)
 router.get('/id', verificacionDeToken, getOrdenesSucursalController)
+router.get('/terminadas', verificacionDeToken, getOrdenesTerminadasController)
 router.post('/id', verificacionDeToken, postOrdenController)
 router.put('/id/:ordenId', verificacionDeToken, putOrdenController)
 router.delete('/id/:ordenId', verificacionDeToken, deleteOrdenController)

@@ -1,5 +1,10 @@
 import { NextFunction, Request, Response } from 'express'
-import { actualizarCaja, crearCaja, getCaja } from '../services/cajas'
+import {
+    actualizarCaja,
+    crearCaja,
+    getAllCajas,
+    getCaja,
+} from '../services/cajas'
 
 export const getCajaController = async (
     req: Request,
@@ -8,6 +13,22 @@ export const getCajaController = async (
 ) => {
     try {
         const response = await getCaja(req.body.session)
+        res.send({
+            success: true,
+            data: response,
+        })
+    } catch (error) {
+        next(error)
+    }
+}
+
+export const getAllCajasController = async (
+    req: Request,
+    res: Response,
+    next: NextFunction
+) => {
+    try {
+        const response = await getAllCajas(req.body.session)
         res.send({
             success: true,
             data: response,

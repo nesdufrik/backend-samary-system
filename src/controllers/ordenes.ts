@@ -7,6 +7,7 @@ import {
     getOrdenesSucursal,
     deleteOrden,
     pagarOrden,
+    getOrdenesTerminadas,
 } from './../services/ordenes'
 import { NextFunction, Request, Response } from 'express'
 
@@ -120,6 +121,23 @@ export const getOrdenesSucursalController = async (
     try {
         const caja: string = req.query.caja as string
         const response = await getOrdenesSucursal(req.body.session, caja)
+        res.send({
+            success: true,
+            data: response,
+        })
+    } catch (error) {
+        next(error)
+    }
+}
+
+export const getOrdenesTerminadasController = async (
+    req: Request,
+    res: Response,
+    next: NextFunction
+) => {
+    try {
+        const caja: string = req.query.caja as string
+        const response = await getOrdenesTerminadas(req.body.session, caja)
         res.send({
             success: true,
             data: response,
