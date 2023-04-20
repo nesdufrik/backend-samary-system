@@ -1,14 +1,14 @@
-import { model, Schema, Types } from "mongoose";
-import { Empresa, Sucursal } from "../interfaces/empresa.interface";
+import { model, Schema, Types } from 'mongoose'
+import { Empresa, Sucursal } from '../interfaces/empresa.interface'
 
 const EmpresaSchema = new Schema<Empresa>(
     {
         name: { type: String, required: true },
-        propietario: { type: Types.ObjectId, ref: 'empleados', required: true }
+        propietario: { type: Types.ObjectId, ref: 'empleados', required: true },
     },
     {
         timestamps: true,
-        versionKey: false
+        versionKey: false,
     }
 )
 
@@ -18,11 +18,12 @@ const SucursalSchema = new Schema<Sucursal>(
         empresa: { type: Types.ObjectId, ref: 'empresas', required: true },
         direccion: String,
         telefono: String,
-        arroba: String
+        arroba: String,
+        metodosPago: [{ type: String, required: true }],
     },
     {
         timestamps: true,
-        versionKey: false
+        versionKey: false,
     }
 )
 

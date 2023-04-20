@@ -20,6 +20,7 @@ export interface Item {
     categoria: string
     etiqueta: string
     precio: number
+    image: string
 }
 
 export interface ProductosOrden extends Item {

@@ -1,4 +1,4 @@
-import { ObjectId } from "mongoose"
+import { ObjectId } from 'mongoose'
 
 export interface Empresa {
     name: string
@@ -11,4 +11,5 @@ export interface Sucursal {
     direccion: string
     telefono: string
     arroba: string
+    metodosPago: [string]
 }

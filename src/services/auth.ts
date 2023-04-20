@@ -64,6 +64,7 @@ export const registerUser = async (data: Usuario) => {
         email: data.email,
         password: passHash,
         fullName: data.fullName,
+        avatar: data.avatar,
     })
 
     return registrar

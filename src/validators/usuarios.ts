@@ -1,15 +1,15 @@
-import { NextFunction, Request, Response } from "express"
-import { check } from "express-validator"
-import { validateResult } from "../utils/validate.handle"
+import { NextFunction, Request, Response } from 'express'
+import { check } from 'express-validator'
+import { validateResult } from '../utils/validate.handle'
 
 export const validateRegisterUsuario = [
     check('email').exists().notEmpty().isEmail(),
     check('password').exists().isStrongPassword(),
     check('fullName').exists().notEmpty().isString(),
+    check('avatar').exists().notEmpty().isString(),
     (req: Request, res: Response, next: NextFunction) => {
         return validateResult(req, res, next)
-    }
-
+    },
 ]
 
 export const validateLogin = [
@@ -17,7 +17,7 @@ export const validateLogin = [
     check('password').exists().notEmpty().isString(),
     (req: Request, res: Response, next: NextFunction) => {
         return validateResult(req, res, next)
-    }
+    },
 ]
 
 export const validateUpdateUsuario = [
@@ -25,5 +25,5 @@ export const validateUpdateUsuario = [
     check('password').optional().notEmpty().isStrongPassword(),
     (req: Request, res: Response, next: NextFunction) => {
         return validateResult(req, res, next)
-    }
+    },
 ]

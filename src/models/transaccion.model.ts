@@ -28,6 +28,7 @@ const ItemSchema = new Schema<Item>(
         categoria: { type: String, required: true },
         etiqueta: { type: String, required: true },
         precio: { type: Number, required: true },
+        image: { type: String, required: false },
     },
     {
         timestamps: true,
