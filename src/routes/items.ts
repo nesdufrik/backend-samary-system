@@ -9,7 +9,7 @@ import {
 
 import { Router } from 'express'
 import { verificacionDeToken } from '../middleware/session.middleware'
-import { uploadMiddleware } from '../utils/storage.handle'
+import { uploadMiddleware } from '../middleware/storage.middleware'
 
 const router = Router()
 

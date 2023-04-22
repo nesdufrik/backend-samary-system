@@ -1,5 +1,5 @@
 import { posGetAllItems } from './../services/items'
-import { NextFunction, Request, response, Response } from 'express'
+import { NextFunction, Request, Response } from 'express'
 import {
     createItem,
     deleteItem,
@@ -46,10 +46,11 @@ export const createItemController = async (
     next: NextFunction
 ) => {
     try {
-        const public_url = process.env.PUBLIC_URL
-        req.body.image = `${public_url}/${req.file?.filename}`
-
-        const response = await createItem(req.body, req.params.sucursalId)
+        const response = await createItem(
+            req.body,
+            req.file,
+            req.params.sucursalId
+        )
         res.send({
             success: true,
             data: response,
