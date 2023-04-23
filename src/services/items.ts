@@ -71,10 +71,56 @@ export const createItem = async (data: Item, file: any, id: string) => {
     return createItem
 }
 
-export const updateItem = async (data: Item, id: string) => {
+export const updateItem = async (data: Item, file: any, id: string) => {
+    const checkIs = await ItemModel.findOne({ _id: id })
+
+    if (!checkIs) throw new ApiError(404, 'Producto no encontrado')
+
+    if (file) {
+        //resize image
+        const buffer = await sharp(file.buffer)
+            .resize({ width: 1920, height: 1080, fit: 'inside' })
+            .toBuffer()
+
+        //random name
+        const imageName = randomImageName()
+
+        if (checkIs.image) {
+            await deleteFile(checkIs.image)
+            const fileUpload = {
+                buffer,
+                filename: imageName,
+                mimetype: file.mimetype,
+            }
+            await uploadFile(fileUpload)
+            data.image = imageName
+        }
+
+        if (!checkIs.image) {
+            const fileUpload = {
+                buffer,
+                filename: imageName,
+                mimetype: file.mimetype,
+            }
+            await uploadFile(fileUpload)
+            data.image = imageName
+        }
+    }
+
+    if (!file) {
+        if (checkIs.image) {
+            data.image = checkIs.image
+        }
+    }
+
     const actualizar = await ItemModel.findOneAndUpdate({ _id: id }, data, {
         new: true,
     })
+
+    if (actualizar?.image) {
+        actualizar.image = getUrlCdn(actualizar.image)
+    }
+
     return actualizar
 }
 

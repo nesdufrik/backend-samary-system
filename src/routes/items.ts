@@ -15,14 +15,18 @@ const router = Router()
 
 router.get('/sucursal/:sucursalId', verificacionDeToken, listAllItemsController)
 router.get('/:itemId', verificacionDeToken, detailItemController)
-router.post('/sucursal/:sucursalId', verificacionDeToken, createItemController)
 router.post(
-    '/sucursal/conIMG/:sucursalId',
+    '/sucursal/:sucursalId',
     verificacionDeToken,
     uploadMiddleware.single('image'),
     createItemController
 )
-router.put('/:itemId', verificacionDeToken, updateItemController)
+router.put(
+    '/:itemId',
+    verificacionDeToken,
+    uploadMiddleware.single('image'),
+    updateItemController
+)
 router.delete('/:itemId', verificacionDeToken, deleteItemController)
 
 //Rutas para Employee

@@ -66,7 +66,7 @@ export const updateItemController = async (
     next: NextFunction
 ) => {
     try {
-        const response = await updateItem(req.body, req.params.itemId)
+        const response = await updateItem(req.body, req.file, req.params.itemId)
         res.send({
             success: true,
             data: response,
