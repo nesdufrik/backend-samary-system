@@ -40,6 +40,8 @@ const CajaSchema = new Schema<Caja>(
     {
         sucursal: { type: Types.ObjectId, ref: 'sucursales', required: true },
         active: { type: Boolean, required: true },
+        total: { type: Number, required: false },
+        reporte: [{ type: Object, required: false }],
     },
     {
         timestamps: true,

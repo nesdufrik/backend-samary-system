@@ -1,4 +1,3 @@
-import { Cliente } from './../interfaces/usuario.interface'
 import { Types } from 'mongoose'
 import { JwtPayload } from 'jsonwebtoken'
 import { Orden } from './../interfaces/transaccion.interface'
@@ -6,8 +5,6 @@ import { OrdenModel } from '../models/transaccion.model'
 import { ClienteModel, EmpleadoModel } from '../models/usuario.model'
 import { ApiError } from '../class/ApiError'
 import { Estado } from '../interfaces/enums'
-import { log } from 'console'
-
 //Analiticas
 export const listarOrdenes = async (sucursalId: string) => {
     const listOrders = await OrdenModel.find({ sucursal: sucursalId })
@@ -23,6 +20,7 @@ export const ordenesPorTotal = async (
     const orderByTotal = await OrdenModel.find(
         {
             sucursal: sucursalId,
+            estado: 'terminado',
             createdAt: { $gte: new Date(desde), $lte: new Date(hasta) },
         },
         { createdAt: 1, total: 1 }
@@ -36,17 +34,11 @@ export const ordenesPorItem = async (
     desde: string,
     hasta: string
 ) => {
-    const filter = {
-        sucursal: new Types.ObjectId(sucursalId),
-        createdAt: {
-            $gte: new Date(desde),
-            $lte: new Date(hasta),
-        },
-    }
     const orderByItem = await OrdenModel.aggregate([
         {
             $match: {
                 sucursal: new Types.ObjectId(sucursalId),
+                estado: 'terminado',
                 createdAt: { $gte: new Date(desde), $lte: new Date(hasta) },
             },
         },

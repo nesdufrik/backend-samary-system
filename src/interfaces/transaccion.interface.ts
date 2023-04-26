@@ -5,6 +5,8 @@ import { Atencion, Estado } from './enums'
 export interface Caja {
     sucursal: ObjectId
     active: boolean
+    total: number
+    reporte: []
 }
 
 export interface Categoria {
