@@ -22,6 +22,29 @@ export const getAllCajas = async (session: JwtPayload) => {
     return cajasSucursal
 }
 
+export const getCajasSucursal = async (id: string) => {
+    const cajasSucursal = await CajaModel.find({
+        sucursal: id,
+        active: false,
+    })
+
+    return cajasSucursal
+}
+
+export const getCajasSucursalDates = async (
+    id: string,
+    desde: string,
+    hasta: string
+) => {
+    const cajasSucursal = await CajaModel.find({
+        sucursal: id,
+        active: false,
+        createdAt: { $gte: new Date(desde), $lte: new Date(hasta) },
+    })
+
+    return cajasSucursal
+}
+
 export const crearCaja = async (data: Caja, session: JwtPayload) => {
     const { active } = data
     const employeeCheck = await EmpleadoModel.findOne({ _id: session.id })
