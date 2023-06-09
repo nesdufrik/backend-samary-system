@@ -41,6 +41,9 @@ export interface Orden {
     tipo: Atencion
     mesa: string
     pedido: [PedidosOrden]
+    desc: number
+    propina: number
+    subtotal: number
     total: number
     factura: boolean
     payMetodo: string
