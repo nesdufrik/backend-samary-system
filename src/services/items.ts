@@ -10,13 +10,14 @@ export const getAllItems = async (id: string) => {
     const listItems = await ItemModel.find(
         { sucursal: id },
         { createdAt: 0, updatedAt: 0, descripcion: 0, sucursal: 0 }
-    )
+    ).sort({ categoria: 1, etiqueta: 1, name: 1 })
 
     for (const item of listItems) {
         if (item.image) {
             item.image = getUrlCdn(item.image)
         }
     }
+
     return listItems
 }
 
