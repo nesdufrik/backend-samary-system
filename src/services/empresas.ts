@@ -53,6 +53,7 @@ export const createSucursal = async (data: Sucursal, id: string) => {
 		telefono: data.telefono,
 		arroba: data.arroba,
 		metodosPago: data.metodosPago,
+		mesas: data.mesas,
 	})
 
 	return crear
