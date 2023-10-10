@@ -39,7 +39,6 @@ export const getCajasSucursalDates = async (
 ) => {
 	const cajasSucursal = await CajaModel.find({
 		sucursal: id,
-		active: false,
 		createdAt: { $gte: new Date(desde), $lte: new Date(hasta) },
 	})
 

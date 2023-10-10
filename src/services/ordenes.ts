@@ -135,6 +135,22 @@ export const getOrdenesTerminadas = async (
 	return listOrders
 }
 
+export const getOrdenesCaja = async (caja: string) => {
+	const box = caja === 'undefined' ? '63ec175ab8f10d4eb8b54e65' : caja
+	const listOrders = new Promise((resolve, reject) => {
+		OrdenModel.find({
+			caja: box,
+			estado: 'terminado',
+		})
+			.populate('empleado', 'fullName avatar -_id')
+			.exec((err, data) => {
+				if (err) throw new ApiError(500, 'Ocurrio un error interno')
+				resolve(data)
+			})
+	})
+	return listOrders
+}
+
 //Employee
 export const deleteOrden = async (id: string) => {
 	const checkIs = await OrdenModel.findOne({ _id: id })
